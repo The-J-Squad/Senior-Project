@@ -15,6 +15,7 @@ import {
 } from 'react-bootstrap'
 import Calculator from '../calculator/component/Calculator'
 import Header from '../header/Header'
+import RecipeEditor from '../recipe/edit/RecipeEditor.js'
 import RecipePreview from '../recipe/preview/RecipePreview.js'
 import Recipe from '../recipe/Recipe.js'
 import './App.css';
@@ -120,7 +121,8 @@ class App extends React.Component {
               <Route path="/about" component={this.About} />
               <Route path="/topics" component={this.Topics} />
               <Route path="/calculator" component={Calculator} />
-              <Route path="/recipes/:id" component={Recipe} />
+              <Route exact path="/recipes/:id" component={Recipe} />
+              <Route path="/recipes/:id/edit" component={RecipeEditor} />
             </Col>
           </Row>
         </Grid>
