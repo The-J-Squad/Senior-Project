@@ -18,6 +18,7 @@ import Header from '../header/Header'
 import RecipeEditor from '../recipe/edit/RecipeEditor.js'
 import RecipePreview from '../recipe/preview/RecipePreview.js'
 import Recipe from '../recipe/Recipe.js'
+import {GetAll} from '../logic/RecipeService.js'
 import './App.css';
 
 class App extends React.Component {
@@ -27,16 +28,14 @@ class App extends React.Component {
       recipes: []
     }
 
-    fetch('/api/recipes', {
-      method: 'get'
-    }).then((response) => response.json().then((json) => {
+    GetAll().then((json)=>{
       let recipes = [];
       json.forEach((recipe) => {
         recipes.push(() => recipe);
       });
 
       this.setState({ recipes });
-    }));
+    })
   }
 
   Home = () => (

@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImageCarousel from '../imageCarousel/ImageCarousel.js';
 import { Glyphicon } from 'react-bootstrap';
+import { withRouter, Redirect } from 'react-router-dom';
+import { Update } from '../../logic/RecipeService.js';
 import './RecipeEditor.css';
 
 class RecipeEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            loading: true,
+            isDone: false
         }
 
         fetch(`/api/recipes/${props.match.params.id}`, {
@@ -61,7 +64,6 @@ class RecipeEditor extends React.Component {
     }
 
     addIngredient(index) {
-        //TODO fix
         this.recipe.ingredients.splice(index + 1, 0,
             {
                 name: "",
@@ -78,7 +80,6 @@ class RecipeEditor extends React.Component {
     }
 
     removeIngredient(index) {
-        //TODO fix
         this.recipe.ingredients.splice(index, 1);
 
         this.setState((prevState) => {
@@ -89,34 +90,30 @@ class RecipeEditor extends React.Component {
     }
 
     addDirection(index) {
-        //TODO fix
         let directions = this.state.directions.slice();
         directions.splice(index + 1, 0, "");
         this.setState({ directions });
     }
 
     removeDirection(index) {
-        //TODO fix
         let directions = this.state.directions.slice();
         directions.splice(index, 1);
         this.setState({ directions });
     }
 
     updateIngredient(index, field, value) {
-        //TODO fix
         this.recipe.ingredients[index][field] = value;
-        this.setState({ loading: true }, () => this.setState({ loading: false }));
+        this.setState((prevState) => { return { ingredientQuantity: prevState.ingredientQuantity } });
     }
 
     updateDirection(index, value) {
-        //TODO fix
         let directions = this.state.directions.slice();
         directions[index] = value;
         this.setState({ directions });
     }
 
     submit() {
-        let directions = {
+        let recipe = {
             name: this.state.name,
             id: this.recipe.id,
             servings: this.state.servings,
@@ -131,17 +128,16 @@ class RecipeEditor extends React.Component {
             images: this.state.images
         }
 
-        fetch(`/api/recipes/${this.recipe.id}`, {
-            method: 'put',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(directions)
+        Update(recipe).then(() => {
+            console.log("DONE");
+            this.setState({ isDone: true });
         });
     }
 
     render() {
+        if (this.state.isDone) {
+            return <Redirect to={`/recipes/${this.recipe.id}`} />
+        }
         if (this.state.loading) {
             return <div> Loading... </div>;
         }
@@ -210,7 +206,7 @@ class RecipeEditor extends React.Component {
                         {
                             this.recipe.ingredients.map((ingredient, index) => {
                                 return (
-                                    <li key={ingredient.name}>
+                                    <li key={index}>
                                         <button type="button" className="add" onClick={() => this.addIngredient(index)}>
                                             <Glyphicon glyph="plus" />
                                         </button>
@@ -237,7 +233,7 @@ class RecipeEditor extends React.Component {
                         {
                             this.state.directions.map((direction, index) => {
                                 return (
-                                    <li key={`${index}. ${direction}`}>
+                                    <li key={index}>
                                         <button type="button" className="add" onClick={() => this.addDirection(index)}>
                                             <Glyphicon glyph="plus" />
                                         </button>
