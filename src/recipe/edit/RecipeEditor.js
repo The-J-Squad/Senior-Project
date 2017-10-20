@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImageCarousel from '../imageCarousel/ImageCarousel.js';
 import { Glyphicon } from 'react-bootstrap';
-import { withRouter, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Update } from '../../logic/RecipeService.js';
 import './RecipeEditor.css';
 
