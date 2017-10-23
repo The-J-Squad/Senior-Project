@@ -1,5 +1,8 @@
 import React from 'react';
 import RecipePreview from './preview/RecipePreview.js';
+import {
+    Link
+} from 'react-router-dom';
 
 class Recipe extends React.Component {
     constructor(props) {
@@ -85,6 +88,9 @@ class Recipe extends React.Component {
                 <RecipePreview recipe={this.state.recipe} />
                 {this.Ingredients()}
                 {this.Directions()}
+                <Link to={`${this.props.match.params.id}/edit`}>
+                    Edit
+                </Link>
             </div>
         );
     }

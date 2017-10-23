@@ -51,7 +51,7 @@ class RecipePreview extends React.Component {
 
         let content = (
             <Row className={this.props.isLink? "recipe-preview" : "recipe-header"}>
-                <Col sm={3} md={2} xsHidden>
+                <Col className="xsFix" sm={3} md={2} xsHidden>
                     <div className="recipe-icon" style={{ "backgroundImage": `url(${recipe.images[0]})` }} />
                 </Col>
                 <Col sm={9} md={10}>

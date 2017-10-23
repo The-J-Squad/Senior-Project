@@ -1,0 +1,44 @@
+.image-carousel-preview .carousel-image{
+    min-height: 100%;
+    max-height: 200px;
+}
+
+.image-carousel-preview .carousel-box{
+    min-height: 100%;
+    max-height: 100%;
+    width: 100%;
+
+}
+
+.image-carousel-preview{
+    width: 600px;
+    height: 200px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.image-input{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.image-input-label{
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+    border-width: 3px;
+    margin: 5px;
+}
+                
+.image-input-label:focus, .image-input-label:hover{
+    background-color: red;
+}

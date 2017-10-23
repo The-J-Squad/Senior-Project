@@ -15,8 +15,10 @@ import {
 } from 'react-bootstrap'
 import Calculator from '../calculator/component/Calculator'
 import Header from '../header/Header'
+import RecipeEditor from '../recipe/edit/RecipeEditor.js'
 import RecipePreview from '../recipe/preview/RecipePreview.js'
 import Recipe from '../recipe/Recipe.js'
+import {GetAll} from '../logic/RecipeService.js'
 import './App.css';
 
 class App extends React.Component {
@@ -26,16 +28,14 @@ class App extends React.Component {
       recipes: []
     }
 
-    fetch('/api/recipes', {
-      method: 'get'
-    }).then((response) => response.json().then((json) => {
+    GetAll().then((json)=>{
       let recipes = [];
       json.forEach((recipe) => {
         recipes.push(() => recipe);
       });
 
       this.setState({ recipes });
-    }));
+    })
   }
 
   Home = () => (
@@ -120,7 +120,8 @@ class App extends React.Component {
               <Route path="/about" component={this.About} />
               <Route path="/topics" component={this.Topics} />
               <Route path="/calculator" component={Calculator} />
-              <Route path="/recipes/:id" component={Recipe} />
+              <Route exact path="/recipes/:id" component={Recipe} />
+              <Route path="/recipes/:id/edit" component={RecipeEditor} />
             </Col>
           </Row>
         </Grid>
