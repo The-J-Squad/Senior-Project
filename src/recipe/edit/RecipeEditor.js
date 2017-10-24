@@ -9,33 +9,44 @@ import './RecipeEditor.css';
 class RecipeEditor extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            loading: true,
-            isDone: false
-        }
 
-        fetch(`/api/recipes/${props.match.params.id}`, {
-            method: 'get'
-        }).then((response) => response.json().then((json) => {
-            console.log(json);
-            this.recipe = json;
-            this.setState({
+        if (props.match && props.match.params && props.match.params.id) {
+            this.state = {
+                loading: true,
+                isDone: false
+            }
+            fetch(`/api/recipes/${props.match.params.id}`, {
+                method: 'get'
+            }).then((response) => response.json().then((json) => {
+                console.log(json);
+                this.recipe = json;
+                this.setState({
+                    loading: false,
+                    name: this.recipe.name,
+                    prepMin: this.recipe.prepTime % 60,
+                    cookMin: this.recipe.cookTime % 60,
+                    prepHr: (this.recipe.prepTime - this.recipe.prepTime % 60) / 60,
+                    cookHr: (this.recipe.cookTime - this.recipe.cookTime % 60) / 60,
+                    isVegetarian: this.recipe.isVegetarian,
+                    isVegan: this.recipe.isVegan,
+                    isGlutenFree: this.recipe.isGlutenFree,
+                    isKosher: this.recipe.isKosher,
+                    ingredientQuantity: this.recipe.ingredients.length,
+                    directions: this.recipe.directions,
+                    images: this.recipe.images,
+                    servings: this.recipe.servings
+                });
+            }));
+        }
+        else {
+            this.recipe = { ingredients: [{ name: "", quantity: 0, unit: "" }] };
+            this.state = {
                 loading: false,
-                name: this.recipe.name,
-                prepMin: this.recipe.prepTime % 60,
-                cookMin: this.recipe.cookTime % 60,
-                prepHr: (this.recipe.prepTime - this.recipe.prepTime % 60) / 60,
-                cookHr: (this.recipe.cookTime - this.recipe.cookTime % 60) / 60,
-                isVegetarian: this.recipe.isVegetarian,
-                isVegan: this.recipe.isVegan,
-                isGlutenFree: this.recipe.isGlutenFree,
-                isKosher: this.recipe.isKosher,
-                ingredientQuantity: this.recipe.ingredients.length,
-                directions: this.recipe.directions,
-                images: this.recipe.images,
-                servings: this.recipe.servings
-            });
-        }));
+                isDone: false,
+                directions: [""],
+                images: []
+            }
+        }
     }
 
     handleSelect(selectedIndex, e) {
@@ -134,7 +145,7 @@ class RecipeEditor extends React.Component {
         });
     }
 
-    removeImage(index){
+    removeImage(index) {
         let images = this.state.images.slice();
         images.splice(index, 1);
         this.setState({ images });
@@ -161,7 +172,7 @@ class RecipeEditor extends React.Component {
                         <input className="image-input" type="file" multiple accept="image/*" onChange={this.loadFile.bind(this)} />
                     </label>
                     <div className="image-carousel-preview">
-                        <ImageCarousel images={this.state.images} deleteFunction={this.removeImage.bind(this)}/>
+                        <ImageCarousel images={this.state.images} deleteFunction={this.removeImage.bind(this)} />
                     </div>
                 </div>
                 <div>
@@ -191,7 +202,7 @@ class RecipeEditor extends React.Component {
                 <div>
                     <label>
                         Vegetarian?
-                        <input type="checkbox" value={true} checked={this.state.isVegetarian} onChange={(event) => {console.log(event); this.setState({ isVegetarian: event.target.value });}} />
+                        <input type="checkbox" value={true} checked={this.state.isVegetarian} onChange={(event) => { console.log(event); this.setState({ isVegetarian: event.target.value }); }} />
                     </label>
                     <label>
                         Vegan?
