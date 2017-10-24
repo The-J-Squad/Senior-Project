@@ -134,6 +134,12 @@ class RecipeEditor extends React.Component {
         });
     }
 
+    removeImage(index){
+        let images = this.state.images.slice();
+        images.splice(index, 1);
+        this.setState({ images });
+    }
+
     render() {
         if (this.state.isDone) {
             return <Redirect to={`/recipes/${this.recipe.id}`} />
@@ -155,7 +161,7 @@ class RecipeEditor extends React.Component {
                         <input className="image-input" type="file" multiple accept="image/*" onChange={this.loadFile.bind(this)} />
                     </label>
                     <div className="image-carousel-preview">
-                        <ImageCarousel images={this.state.images} />
+                        <ImageCarousel images={this.state.images} deleteFunction={this.removeImage.bind(this)}/>
                     </div>
                 </div>
                 <div>
@@ -185,7 +191,7 @@ class RecipeEditor extends React.Component {
                 <div>
                     <label>
                         Vegetarian?
-                        <input type="checkbox" value={true} checked={this.state.isVegetarian} onChange={(event) => this.setState({ isVegetarian: event.target.value })} />
+                        <input type="checkbox" value={true} checked={this.state.isVegetarian} onChange={(event) => {console.log(event); this.setState({ isVegetarian: event.target.value });}} />
                     </label>
                     <label>
                         Vegan?
