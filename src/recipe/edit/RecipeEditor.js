@@ -93,9 +93,13 @@ class RecipeEditor extends React.Component {
     removeIngredient(index) {
         this.recipe.ingredients.splice(index, 1);
 
+        if(this.recipe.ingredients.length == 0){
+            this.recipe.ingredients = [{}];
+        }
+
         this.setState((prevState) => {
             return {
-                ingredientQuantity: prevState.ingredientQuantity - 1
+                ingredientQuantity: this.recipe.ingredients.length
             }
         })
     }
@@ -109,6 +113,9 @@ class RecipeEditor extends React.Component {
     removeDirection(index) {
         let directions = this.state.directions.slice();
         directions.splice(index, 1);
+        if(directions.length == 0){
+            directions = [""];
+        }
         this.setState({ directions });
     }
 
