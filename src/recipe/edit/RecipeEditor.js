@@ -152,7 +152,8 @@ class RecipeEditor extends React.Component {
             });
         }
         else {
-            Add(recipe).then(() => {
+            Add(recipe).then((recipe) => {
+                this.recipe = recipe;
                 this.setState({ isDone: true });
             });
         }
