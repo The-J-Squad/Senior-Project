@@ -39,7 +39,7 @@ class RecipeEditor extends React.Component {
             }));
         }
         else {
-            this.recipe = { ingredients: [{ name: "", quantity: 0, unit: "" }] };
+            this.recipe = { ingredients: [{}] };
             this.state = {
                 loading: false,
                 isDone: false,
@@ -93,7 +93,7 @@ class RecipeEditor extends React.Component {
     removeIngredient(index) {
         this.recipe.ingredients.splice(index, 1);
 
-        if(this.recipe.ingredients.length == 0){
+        if(this.recipe.ingredients.length === 0){
             this.recipe.ingredients = [{}];
         }
 
@@ -113,7 +113,7 @@ class RecipeEditor extends React.Component {
     removeDirection(index) {
         let directions = this.state.directions.slice();
         directions.splice(index, 1);
-        if(directions.length == 0){
+        if(directions.length === 0){
             directions = [""];
         }
         this.setState({ directions });
@@ -170,7 +170,7 @@ class RecipeEditor extends React.Component {
                 <div>
                     <label>
                         Name of recipe:
-                        <input type="text" value={this.state.name} onChange={(event) => this.setState({ name: event.target.value })} />
+                        <input type="text" value={this.state.name} onChange={(event) => this.setState({ name: event.target.value })} placeholder="Recipe name"/>
                     </label>
                 </div>
                 <div>
@@ -185,25 +185,25 @@ class RecipeEditor extends React.Component {
                 <div>
                     <label>
                         Prep time:
-                        <input type="number" value={this.state.prepHr} onChange={(event) => this.setState({ prepHr: event.target.value })} />
+                        <input type="number" value={this.state.prepHr} onChange={(event) => this.setState({ prepHr: event.target.value })} placeholder="Hours"/>
                         hours
-                        <input type="number" value={this.state.prepMin} onChange={(event) => this.setState({ prepMin: event.target.value })} />
+                        <input type="number" value={this.state.prepMin} onChange={(event) => this.setState({ prepMin: event.target.value })} placeholder="Minutes"/>
                         minutes
                     </label>
                 </div>
                 <div>
                     <label>
                         Cook time:
-                        <input type="number" value={this.state.cookHr} onChange={(event) => this.setState({ cookHr: event.target.value })} />
+                        <input type="number" value={this.state.cookHr} onChange={(event) => this.setState({ cookHr: event.target.value })} placeholder="Hours"/>
                         hours
-                        <input type="number" value={this.state.cookMin} onChange={(event) => this.setState({ cookMin: event.target.value })} />
+                        <input type="number" value={this.state.cookMin} onChange={(event) => this.setState({ cookMin: event.target.value })} placeholder="Minutes"/>
                         minutes
                     </label>
                 </div>
                 <div>
                     <label>
                         Servings:
-                        <input type="text" value={this.state.servings} onChange={(event) => this.setState({ servings: event.target.value })} />
+                        <input type="text" value={this.state.servings} onChange={(event) => this.setState({ servings: event.target.value })} placeholder="Servings"/>
                     </label>
                 </div>
                 <div>
@@ -239,11 +239,11 @@ class RecipeEditor extends React.Component {
                                         </button>
                                         <label>
                                             Name:
-                                            <input type="text" value={ingredient.name} onChange={(event) => this.updateIngredient(index, "name", event.target.value)} />
+                                            <input type="text" value={ingredient.name} onChange={(event) => this.updateIngredient(index, "name", event.target.value)} placeholder="Name"/>
                                             :
-                                            <input type="number" value={ingredient.quantity} onChange={(event) => this.updateIngredient(index, "quantity", event.target.value)} />
-                                            <input type="text" value={ingredient.unit} onChange={(event) => this.updateIngredient(index, "unit", event.target.value)} />
-                                            (<input type="text" value={ingredient.comment} onChange={(event) => this.updateIngredient(index, "comment", event.target.value)} />)
+                                            <input type="number" value={ingredient.quantity} onChange={(event) => this.updateIngredient(index, "quantity", event.target.value)} placeholder="Quantity"/>
+                                            <input type="text" value={ingredient.unit} onChange={(event) => this.updateIngredient(index, "unit", event.target.value)} placeholder="Unit"/>
+                                            (<input type="text" value={ingredient.comment} onChange={(event) => this.updateIngredient(index, "comment", event.target.value)} placeholder="Comment"/>)
                                         </label>
                                     </li>
                                 );
@@ -264,7 +264,7 @@ class RecipeEditor extends React.Component {
                                         <button type="button" className="remove" onClick={() => this.removeDirection(index)}>
                                             <Glyphicon glyph="remove" />
                                         </button>
-                                        <input type="text" value={direction} onChange={(event) => this.updateDirection(index, event.target.value)} />
+                                        <input type="text" value={direction} onChange={(event) => this.updateDirection(index, event.target.value)} placeholder="Direction"/>
                                     </li>
                                 );
                             })
