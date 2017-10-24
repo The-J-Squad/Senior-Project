@@ -209,19 +209,19 @@ class RecipeEditor extends React.Component {
                 <div>
                     <label>
                         Vegetarian?
-                        <input type="checkbox" value={true} checked={this.state.isVegetarian} onChange={(event) => { console.log(event); this.setState({ isVegetarian: event.target.value }); }} />
+                        <input type="checkbox" value={true} checked={this.state.isVegetarian} onChange={(event) => { console.log(event); this.setState({ isVegetarian: event.target.checked }); }} />
                     </label>
                     <label>
                         Vegan?
-                        <input type="checkbox" value={true} checked={this.state.isVegan} onChange={(event) => this.setState({ isVegan: event.target.value, isVegetarian: event.target.value || this.state.isVegetarian })} />
+                        <input type="checkbox" value={true} checked={this.state.isVegan} onChange={(event) => this.setState({ isVegan: event.target.checked, isVegetarian: event.target.checked || this.state.isVegetarian })} />
                     </label>
                     <label>
                         Kosher?
-                        <input type="checkbox" value={true} checked={this.state.isKosher} onChange={(event) => this.setState({ isKosher: event.target.value })} />
+                        <input type="checkbox" value={true} checked={this.state.isKosher} onChange={(event) => this.setState({ isKosher: event.target.checked })} />
                     </label>
                     <label>
                         Gluten Free?
-                        <input type="checkbox" value={true} checked={this.state.isGlutenFree} onChange={(event) => this.setState({ isGlutenFree: event.target.value })} />
+                        <input type="checkbox" value={true} checked={this.state.isGlutenFree} onChange={(event) => this.setState({ isGlutenFree: event.target.checked })} />
                     </label>
                 </div>
                 <div>
