@@ -1,5 +1,7 @@
 import React from 'react';
 import RecipePreview from './preview/RecipePreview.js';
+import { Redirect } from 'react-router-dom';
+import { Get } from '../logic/RecipeService.js';
 import {
     Link
 } from 'react-router-dom';
@@ -12,17 +14,26 @@ class Recipe extends React.Component {
             loading: true
         }
 
-        console.log(props.match.params.id);
-
-        fetch(`/api/recipes/${props.match.params.id}`, {
-            method: 'get'
-        }).then((response) => response.json().then((json) => {
-            console.log(json);
-            this.setState({
-                recipe: () => { return json },
-                loading: false
+        try {
+            Get(props.match.params.id).then((recipe) => {
+                console.log(recipe);
+                this.setState({
+                    recipe: () => { return recipe },
+                    loading: false
+                });
+            }).catch((e) => {
+                console.log("Redirecting... Error:", e);
+                this.setState({
+                    redirect: true
+                });
             });
-        }));
+        }
+        catch (e) {
+            console.log("Redirecting... Error:", e);
+            this.setState({
+                redirect: true
+            });
+        }
     }
 
     Ingredients() {
@@ -78,6 +89,9 @@ class Recipe extends React.Component {
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to={`/`} />
+        }
         if (this.state.loading) {
             return (
                 <div> Loading... </div>

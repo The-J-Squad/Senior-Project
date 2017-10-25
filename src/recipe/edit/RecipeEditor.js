@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImageCarousel from '../imageCarousel/ImageCarousel.js';
 import { Glyphicon } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import { Update, Add } from '../../logic/RecipeService.js';
+import { Update, Add, Get } from '../../logic/RecipeService.js';
 import './RecipeEditor.css';
 
 class RecipeEditor extends React.Component {
@@ -15,9 +15,7 @@ class RecipeEditor extends React.Component {
                 loading: true,
                 isDone: false
             }
-            fetch(`/api/recipes/${props.match.params.id}`, {
-                method: 'get'
-            }).then((response) => response.json().then((json) => {
+            Get(props.match.params.id).then((json) => {
                 console.log(json);
                 this.recipe = json;
                 this.setState({
@@ -36,15 +34,31 @@ class RecipeEditor extends React.Component {
                     images: this.recipe.images,
                     servings: this.recipe.servings
                 });
-            }));
+            }).catch((e) => {
+            console.log("Redirecting... Error:", e);
+            this.setState({
+                redirect: true
+            });
+        });;
         }
         else {
             this.recipe = { ingredients: [{}] };
             this.state = {
                 loading: false,
                 isDone: false,
+                name: this.recipe.name,
+                prepMin: "",
+                cookMin: "",
+                prepHr: "",
+                cookHr: "",
+                isVegetarian: false,
+                isVegan: false,
+                isGlutenFree: false,
+                isKosher: false,
+                ingredientQuantity: 1,
                 directions: [""],
-                images: []
+                images: [],
+                servings: ""
             }
         }
     }
@@ -135,8 +149,8 @@ class RecipeEditor extends React.Component {
             name: this.state.name,
             id: this.recipe.id,
             servings: this.state.servings,
-            prepTime: this.state.prepHr * 60 + this.state.prepMin,
-            cookTime: this.state.cookHr * 60 + this.state.cookMin,
+            prepTime: parseFloat(this.state.prepHr) * 60 + parseFloat(this.state.prepMin),
+            cookTime: parseFloat(this.state.cookHr) * 60 + parseFloat(this.state.cookMin),
             ingredients: this.recipe.ingredients,
             directions: this.state.directions,
             isVegan: this.state.isVegan,
@@ -166,6 +180,9 @@ class RecipeEditor extends React.Component {
     }
 
     render() {
+        if (this.state.redirect) {
+            return <Redirect to={'/'} />
+        }
         if (this.state.isDone) {
             return <Redirect to={`/recipes/${this.recipe.id}`} />
         }
@@ -233,7 +250,7 @@ class RecipeEditor extends React.Component {
                 </div>
                 <div>
                     Ingredients:
-                <ul>
+                        <ul>
                         {
                             this.recipe.ingredients.map((ingredient, index) => {
                                 return (
