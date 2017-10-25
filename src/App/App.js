@@ -17,7 +17,6 @@ import Calculator from '../calculator/component/Calculator'
 import Header from '../header/Header'
 import RecipeEditor from '../recipe/edit/RecipeEditor.js'
 import RecipeCreator from '../recipe/create/RecipeCreator.js'
-import RecipePreview from '../recipe/preview/RecipePreview.js'
 import Recipe from '../recipe/Recipe.js'
 import Home from '../home/Home.js'
 import './App.css';
