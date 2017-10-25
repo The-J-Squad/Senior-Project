@@ -14,26 +14,18 @@ class Recipe extends React.Component {
             loading: true
         }
 
-        try {
-            Get(props.match.params.id).then((recipe) => {
-                console.log(recipe);
-                this.setState({
-                    recipe: () => { return recipe },
-                    loading: false
-                });
-            }).catch((e) => {
-                console.log("Redirecting... Error:", e);
-                this.setState({
-                    redirect: true
-                });
+        Get(props.match.params.id).then((recipe) => {
+            console.log(recipe);
+            this.setState({
+                recipe: () => { return recipe },
+                loading: false
             });
-        }
-        catch (e) {
+        }).catch((e) => {
             console.log("Redirecting... Error:", e);
             this.setState({
                 redirect: true
             });
-        }
+        });
     }
 
     Ingredients() {

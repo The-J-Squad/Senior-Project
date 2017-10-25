@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ImageCarousel from '../imageCarousel/ImageCarousel.js';
 import { Glyphicon } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
-import { Update, Add, Get } from '../../logic/RecipeService.js';
+import { Update, Add, Get, Delete } from '../../logic/RecipeService.js';
 import './RecipeEditor.css';
 
 class RecipeEditor extends React.Component {
@@ -35,11 +35,11 @@ class RecipeEditor extends React.Component {
                     servings: this.recipe.servings
                 });
             }).catch((e) => {
-            console.log("Redirecting... Error:", e);
-            this.setState({
-                redirect: true
-            });
-        });;
+                console.log("Redirecting... Error:", e);
+                this.setState({
+                    redirect: true
+                });
+            });;
         }
         else {
             this.recipe = { ingredients: [{}] };
@@ -173,6 +173,17 @@ class RecipeEditor extends React.Component {
         }
     }
 
+    delete() {
+        if (this.recipe && this.recipe.id) {
+            Delete(this.recipe.id).then(() => {
+                this.setState({ redirect: true });
+            });
+        }
+        else {
+            this.setState({ redirect: true });
+        }
+    }
+
     removeImage(index) {
         let images = this.state.images.slice();
         images.splice(index, 1);
@@ -296,6 +307,7 @@ class RecipeEditor extends React.Component {
                     </ol>
                 </div>
                 <button type="button" onClick={this.submit.bind(this)}> Submit </button>
+                <button type="button" onClick={this.delete.bind(this)}> Delete </button>
             </form>
         );
     }

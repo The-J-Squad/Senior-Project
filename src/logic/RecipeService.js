@@ -38,4 +38,11 @@ async function Add(recipe) {
     return await response.json();
 }
 
-export { GetAll, Get, Update, Add };
+async function Delete(id) {
+    let response = await fetch(`/api/recipes/${id}`, {
+        method: 'delete'
+    });
+    return await response.json();
+}
+
+export { GetAll, Get, Update, Add, Delete };
