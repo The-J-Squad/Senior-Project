@@ -24,7 +24,7 @@ class Header extends React.Component {
                 <Navbar.Collapse>
                     <Nav>
                         <LinkContainer exact to="/" ><NavItem eventKey={1}>Home</NavItem></LinkContainer >
-                        <LinkContainer exact to="/about"><NavItem eventKey={2}>About</NavItem></LinkContainer>
+                        <LinkContainer exact to="/create"><NavItem eventKey={2}>Create</NavItem></LinkContainer>
                         <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                             <LinkContainer exact to="/topics"><MenuItem eventKey={3.1}>Topics</MenuItem></LinkContainer>
                             <LinkContainer exact to="/calculator"><MenuItem eventKey={3.2}>Calculator </MenuItem></LinkContainer>

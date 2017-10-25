@@ -16,6 +16,7 @@ import {
 import Calculator from '../calculator/component/Calculator'
 import Header from '../header/Header'
 import RecipeEditor from '../recipe/edit/RecipeEditor.js'
+import RecipeCreator from '../recipe/create/RecipeCreator.js'
 import RecipePreview from '../recipe/preview/RecipePreview.js'
 import Recipe from '../recipe/Recipe.js'
 import {GetAll} from '../logic/RecipeService.js'
@@ -122,6 +123,7 @@ class App extends React.Component {
               <Route path="/calculator" component={Calculator} />
               <Route exact path="/recipes/:id" component={Recipe} />
               <Route path="/recipes/:id/edit" component={RecipeEditor} />
+              <Route path="/create" component={RecipeCreator} />
             </Col>
           </Row>
         </Grid>

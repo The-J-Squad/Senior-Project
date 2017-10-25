@@ -25,4 +25,24 @@ async function Update(recipe) {
     return await response.json();
 }
 
-export { GetAll, Get, Update };
+async function Add(recipe) {
+    let response = await fetch(`/api/recipes`, {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(recipe)
+    });
+
+    return await response.json();
+}
+
+async function Delete(id) {
+    let response = await fetch(`/api/recipes/${id}`, {
+        method: 'delete'
+    });
+    return await response.json();
+}
+
+export { GetAll, Get, Update, Add, Delete };
