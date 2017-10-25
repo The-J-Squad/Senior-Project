@@ -19,36 +19,10 @@ import RecipeEditor from '../recipe/edit/RecipeEditor.js'
 import RecipeCreator from '../recipe/create/RecipeCreator.js'
 import RecipePreview from '../recipe/preview/RecipePreview.js'
 import Recipe from '../recipe/Recipe.js'
-import {GetAll} from '../logic/RecipeService.js'
+import Home from '../home/Home.js'
 import './App.css';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      recipes: []
-    }
-
-    GetAll().then((json)=>{
-      let recipes = [];
-      json.forEach((recipe) => {
-        recipes.push(() => recipe);
-      });
-
-      this.setState({ recipes });
-    })
-  }
-
-  Home = () => (
-    <span>
-      {
-        this.state.recipes.map((recipe) => {
-          return <RecipePreview key={recipe().id} recipe={recipe} isLink={true}/>
-        })
-      }
-    </span>
-  )
-
   About = () => (
     <ButtonToolbar>
       <OverlayTrigger trigger="click" placement="left" overlay={this.CalculatorPopover}>
@@ -117,7 +91,7 @@ class App extends React.Component {
           </Row>
           <Row className="app-body">
             <Col>
-              <Route exact path="/" component={this.Home} />
+              <Route exact path="/" component={Home} />
               <Route path="/about" component={this.About} />
               <Route path="/topics" component={this.Topics} />
               <Route path="/calculator" component={Calculator} />
