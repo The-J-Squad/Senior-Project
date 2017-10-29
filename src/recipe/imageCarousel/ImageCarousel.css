@@ -5,6 +5,7 @@
     display: inline-block;
     margin: auto;
     vertical-align: middle;
+    max-width:100%;
 }
 
 .carousel-box{
