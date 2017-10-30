@@ -12,6 +12,13 @@ async function Get(id) {
     return await response.json();
 }
 
+async function GetSpecificRecipes(searchterms){
+	let response = await fetch(`/api/recipes/search/${searchterms}`, {
+		method: 'get'
+	});
+	return await response.json();
+}
+
 async function Update(recipe) {
     let response = await fetch(`/api/recipes/${recipe.id}`, {
         method: 'put',
@@ -45,4 +52,4 @@ async function Delete(id) {
     return await response.json();
 }
 
-export { GetAll, Get, Update, Add, Delete };
+export { GetAll, Get, Update, GetSpecificRecipes, Add, Delete };

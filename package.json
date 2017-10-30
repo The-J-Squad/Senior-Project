@@ -2,7 +2,7 @@
   "name": "reciprocity",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:9253",
+  "proxy": "http://localhost:51021",
   "dependencies": {
     "chai": "^4.1.2",
     "history": "^4.7.2",

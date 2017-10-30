@@ -18,9 +18,8 @@ class App extends React.Component {
           <div id="home">
             <Home />
           </div> 
-
       </body>
-    )
-  }
+		)
+	}
 }
-export default App;
+export default App; 
