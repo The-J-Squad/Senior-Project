@@ -1,8 +1,8 @@
-.app-body {
-  margin: 60px;
+body {
+  background-color: beige;  
 }
 
 .container {
-	margin: 0;
+  margin: 0;
   width: 100%;
 }
