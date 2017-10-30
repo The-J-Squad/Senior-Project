@@ -1,5 +1,5 @@
 import React from 'react';
-import Initial from '../initial/Initial'
+//import Initial from '../initial/Initial'
 import Home from '../home/Home'
 import './App.css'
 
