@@ -1,0 +1,12 @@
+body {
+    background-color: beige;  
+}
+
+.app-body {
+    padding: 2%;
+}
+
+.container {
+    margin: 0;
+    width: 100%;
+}
