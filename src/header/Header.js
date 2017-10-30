@@ -8,7 +8,6 @@ import {
 	FormControl,
 	Button,
 	FormGroup, 
-	ControlLabel,
     Nav
 } from 'react-bootstrap'
 
@@ -36,7 +35,7 @@ class Header extends React.Component {
 						<FormGroup>
 							<FormControl type="text" placeholder="Search for recipes..." />
 							{' '}
-							<Button type="search" onClick={() => null}>Search!</Button>
+							<Button type="button" onClick={() => null}>Search!</Button>
 						</FormGroup>
                         </Navbar.Form>
                         <NavDropdown eventKey={3} title="Menu" id="basic-nav-dropdown">

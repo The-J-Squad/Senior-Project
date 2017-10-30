@@ -123,7 +123,7 @@ class Home extends React.Component {
                   <Route path="/about" component={this.About} />
                   <Route path="/topics" component={this.Topics} />
                   <Route path="/calculator" component={Calculator} />
-				  <Route exact path="/recipe/search/:searchterms" component={RecipeSearch} />
+				  <Route exact path="/recipes/search/:searchterms" component={RecipeSearch} />
                   <Route exact path="/recipes/:id" component={Recipe} />
                   <Route path="/recipes/:id/edit" component={RecipeEditor} />
                 </Col>
