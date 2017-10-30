@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    Row,
-    Col
-} from 'react-bootstrap';
-import {
     NavLink
 } from 'react-router-dom';
 import Prep from '../../images/ico_prep.png';
 import Cook from '../../images/ico_cook.png';
 import Serve from '../../images/ico_serving.png';
+import ImageCarousel from '../imageCarousel/ImageCarousel.js';
 import './RecipePreview.css';
 
 class RecipePreview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipe: props.recipe
+            recipe: props.recipe,
+            images: props.recipe().images
         }
     }
     time(time) {
@@ -50,34 +48,26 @@ class RecipePreview extends React.Component {
         let recipe = this.state.recipe();
 
         let content = (
-            <Row className={this.props.isLink? "recipe-preview" : "recipe-header"}>
-                <Col className="xsFix" sm={3} md={2} xsHidden>
-                    <div className="recipe-icon" style={{ "backgroundImage": `url(${recipe.images[0]})` }} />
-                </Col>
-                <Col sm={9} md={10}>
-                    <div className="recipe-name">
-                        {recipe.name}
+            <div className={this.props.isLink ? "recipe-preview" : "recipe-header"}>
+                <div className="recipe-name">
+                    {recipe.name}
+                </div>
+                <div className="recipe-image-carousel-preview">
+                    <ImageCarousel images={this.state.images} />
+                </div>
+                <div>
+                    <div className="recipe-description outter">
+                        <div className="icon" style={{ "backgroundImage": `url(${Prep})` }} /> <strong> Prep Time: </strong>{this.time(recipe.prepTime)}
                     </div>
-                    <Row>
-                        <Col xs={4} smHidden mdHidden lgHidden>
-                            <div className="recipe-icon" style={{ "backgroundImage": `url(${recipe.images[0]})` }} />
-                        </Col>
-                        <Col xs={8} sm={12}>
-                            <div className="recipe-description outter">
-                                <div className="icon" style={{ "backgroundImage": `url(${Prep})` }} /> <strong> Prep Time: </strong>{this.time(recipe.prepTime)}
-                            </div>
-                            <div className="recipe-description">
-                                <div className="icon" style={{ "backgroundImage": `url(${Cook})` }} /> <strong> Cook Time: </strong>{this.time(recipe.cookTime)}
-                            </div>
-                            <div className="recipe-description">
-                                <div className="icon" style={{ "backgroundImage": `url(${Serve})` }} /> <strong> Serves: </strong>{recipe.servings}
-                            </div>
-                        </Col>
-                    </Row>
-                </Col>
-            </Row>
+                    <div className="recipe-description">
+                        <div className="icon" style={{ "backgroundImage": `url(${Cook})` }} /> <strong> Cook Time: </strong>{this.time(recipe.cookTime)}
+                    </div>
+                    <div className="recipe-description">
+                        <div className="icon" style={{ "backgroundImage": `url(${Serve})` }} /> <strong> Serves: </strong>{recipe.servings}
+                    </div>
+                </div>
+            </div>
         );
-
         if (this.props.isLink) {
             return (
                 <NavLink to={`/recipes/${recipe.id}`}>

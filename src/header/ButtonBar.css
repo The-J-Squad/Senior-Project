@@ -8,10 +8,11 @@
 }
 
 .header-button-bar {
-    padding: 0px;
+    padding: 5px;
 }
 
 .header-button-bar .icon {
-    width: 50px;
     cursor: pointer;
+    padding: 3%;
+    width: 50px;
 }
