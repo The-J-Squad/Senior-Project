@@ -5,19 +5,22 @@ import {
     NavItem,
     NavDropdown,
     MenuItem,
+	FormControl,
+	Button,
+	FormGroup, 
+	ControlLabel,
     Nav
 } from 'react-bootstrap'
 
 import ButtonBar from './ButtonBar'
 
 class Header extends React.Component {
-
     render() {
         return (
             <Navbar collapseOnSelect fixedTop className="test">
                 <Navbar.Header>
                     <Navbar.Brand>
-                        Recipe Sharing Site
+                        Reciprocity™
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -25,7 +28,14 @@ class Header extends React.Component {
                     <Nav>
                         <LinkContainer exact to="/" ><NavItem eventKey={1}>Home</NavItem></LinkContainer >
                         <LinkContainer exact to="/about"><NavItem eventKey={2}>About</NavItem></LinkContainer>
-                        <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
+						<Navbar.Form pullLeft>
+						<FormGroup>
+							<FormControl type="text" placeholder="Search for recipes..." />
+							{' '}
+							<Button type="search" onClick={() => null}>Search!</Button>
+						</FormGroup>
+                        </Navbar.Form>
+						<NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                             <LinkContainer exact to="/topics"><MenuItem eventKey={3.1}>Topics</MenuItem></LinkContainer>
                             <LinkContainer exact to="/calculator"><MenuItem eventKey={3.2}>Calculator </MenuItem></LinkContainer>
                             <LinkContainer exact to="/about"><MenuItem eventKey={3.3}>About </MenuItem></LinkContainer>
