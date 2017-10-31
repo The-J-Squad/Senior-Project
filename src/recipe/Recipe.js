@@ -1,9 +1,9 @@
 import React from 'react';
 import RecipePreview from './preview/RecipePreview.js';
-import { Redirect } from 'react-router-dom';
 import { Get } from '../logic/RecipeService.js';
 import {
-    Link
+    Link,
+    Redirect
 } from 'react-router-dom';
 
 class Recipe extends React.Component {
@@ -15,7 +15,6 @@ class Recipe extends React.Component {
         }
 
         Get(props.match.params.id).then((recipe) => {
-            console.log(recipe);
             this.setState({
                 recipe: () => { return recipe },
                 loading: false

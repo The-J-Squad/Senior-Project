@@ -7,7 +7,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <body className="app-body">
+      <div className="app-body">
 
         {/* pre-login home screen */}
           {/* <div id="initial">
@@ -18,7 +18,7 @@ class App extends React.Component {
           <div id="home">
             <Home />
           </div> 
-      </body>
+      </div>
 		)
 	}
 }

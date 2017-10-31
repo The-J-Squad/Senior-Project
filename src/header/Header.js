@@ -5,22 +5,26 @@ import {
     NavItem,
     NavDropdown,
     MenuItem,
-	FormControl,
-	Button,
-	FormGroup, 
+    FormControl,
+    FormGroup,
     Nav
 } from 'react-bootstrap'
-
+import { Link } from 'react-router-dom';
 import ButtonBar from './ButtonBar'
+import './Header.css'
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            searchValue: ""
+        }
+    }
+
     render() {
-        const style = {
-            background: '#660000'
-        };
 
         return (
-            <Navbar collapseOnSelect fixedTop inverse style={style}>
+            <Navbar collapseOnSelect fixedTop inverse className="header">
                 <Navbar.Header>
                     <Navbar.Brand>
                         Reciprocity™
@@ -30,23 +34,23 @@ class Header extends React.Component {
                 <Navbar.Collapse>
                     <Nav>
                         <LinkContainer exact to="/" ><NavItem eventKey={1}>Home</NavItem></LinkContainer>
-                        <LinkContainer exact to="/create"><NavItem eventKey={2}>Create</NavItem></LinkContainer> 
-						<Navbar.Form pullLeft>
-						<FormGroup>
-							<FormControl type="text" placeholder="Search for recipes..." />
-							{' '}
-							<Button type="button" onClick={() => null}>Search!</Button>
-						</FormGroup>
-                        </Navbar.Form>
+
                         <NavDropdown eventKey={3} title="Menu" id="basic-nav-dropdown">
-                            <LinkContainer exact to="/topics"><MenuItem eventKey={3.1}>Add Recipe</MenuItem></LinkContainer>
+                            <LinkContainer exact to="/create"><MenuItem eventKey={3.1}>Add Recipe</MenuItem></LinkContainer>
                             <LinkContainer exact to="/calculator"><MenuItem eventKey={3.2}>Search Recipes</MenuItem></LinkContainer>
                             <LinkContainer exact to="/about"><MenuItem eventKey={3.3}>View Favorites</MenuItem></LinkContainer>
                         </NavDropdown>
                         <NavDropdown eventKey={3} title="Tools" id="basic-nav-dropdown">
-                            <ButtonBar/>
+                            <ButtonBar />
                         </NavDropdown>
                     </Nav>
+                    <Navbar.Form pullLeft>
+                        <FormGroup>
+                            <FormControl type="text" placeholder="Search for recipes..." onChange={(event) => this.setState({ searchValue: event.target.value })}/>
+                        </FormGroup>
+                        {' '}
+                        <Link className="btn btn-default" to={`/Search/${this.state.searchValue}`} >Search!</Link>
+                    </Navbar.Form>
                     <Nav pullRight>
                         <NavDropdown eventKey={4} title="Account" id="basic-nav-dropdown">
                             <LinkContainer exact to="/topics"><MenuItem eventKey={4.1}>Edit Information</MenuItem></LinkContainer>
@@ -54,7 +58,7 @@ class Header extends React.Component {
                             <MenuItem divider />
                             <LinkContainer exact to="/"><MenuItem eventKey={4.4}>Log Out </MenuItem></LinkContainer>
                         </NavDropdown>
-                    </Nav> 
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
         )
