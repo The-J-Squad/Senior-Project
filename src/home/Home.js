@@ -44,8 +44,8 @@ class Home extends React.Component {
       <Row>
       {
         this.state.recipes.map((recipe) => {
-          return <Col xs={12} sm={6} md={4} lg={3}>
-            <RecipePreview key={recipe().id} recipe={recipe} isLink={true} />
+          return <Col xs={12} sm={6} md={4} lg={3} key={recipe().id}>
+            <RecipePreview recipe={recipe} isLink={true} />
           </Col>
         })
       }
