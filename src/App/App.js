@@ -1,6 +1,6 @@
 import React from 'react';
 //import Initial from '../initial/Initial'
-import Home from '../home/Home'
+import Home from '../root/Home.js'
 import './App.css'
 
 class App extends React.Component {
