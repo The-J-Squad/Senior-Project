@@ -1,5 +1,5 @@
 import React from 'react';
-import RecipePreview from '../preview/RecipePreview.js';
+import RecipeList from '../list/RecipeList.js';
 import { GetSpecificRecipes } from '../../logic/RecipeService.js';
 
 class RecipeSearch extends React.Component {
@@ -24,15 +24,7 @@ class RecipeSearch extends React.Component {
                 <div> Loading... </div>
             )
         }
-        return (
-            <span>
-                {
-                    this.state.recipes().map((recipe) => {
-                        return <RecipePreview key={recipe.id} recipe={() => { return recipe }} isLink={true} />
-                    })
-                }
-            </span>
-        );
+        return <RecipeList recipes={this.state.recipes()} />
     }
 }
 
