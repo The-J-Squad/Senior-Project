@@ -6,3 +6,7 @@ body {
   margin: 0;
   width: 100%;
 }
+
+.app-body {
+    padding: 2%;
+}
