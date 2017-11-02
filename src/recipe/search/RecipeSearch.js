@@ -18,6 +18,19 @@ class RecipeSearch extends React.Component {
         });
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            loading: true
+        });
+
+        GetSpecificRecipes(nextProps.match.params.searchterms).then((recipes) => {
+            this.setState({
+                recipes: () => { return recipes },
+                loading: false
+            });
+        });
+    }
+
     render() {
         if (this.state.loading) {
             return (
