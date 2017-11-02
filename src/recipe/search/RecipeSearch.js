@@ -10,7 +10,7 @@ class RecipeSearch extends React.Component {
             loading: true
         }
 
-        GetSpecificRecipes(props.match.params.id).then((recipes) => {
+        GetSpecificRecipes(props.match.params.searchterms).then((recipes) => {
             this.setState({
                 recipes: () => { return recipes },
                 loading: false

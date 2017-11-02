@@ -51,7 +51,7 @@ class Header extends React.Component {
                                 <FormControl type="text" placeholder="Search for recipes..." onChange={(event) => this.setState({ searchValue: event.target.value })} />
                             </FormGroup>
                             {' '}
-                            <Link className="btn btn-default" to={`/Search/${this.state.searchValue}`} >Search!</Link>
+                            <Link className="btn btn-default" to={`/recipes/search/${this.state.searchValue}`} >Search!</Link>
                         </Navbar.Form>
                         <Nav pullRight>
                             <NavDropdown eventKey={4} title="Account" id="basic-nav-dropdown">
