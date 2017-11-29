@@ -39,7 +39,7 @@ class Header extends React.Component {
 
                             <NavDropdown eventKey={3} title="Menu" id="basic-nav-dropdown">
                                 <LinkContainer exact to="/create"><MenuItem eventKey={3.1}>Add Recipe</MenuItem></LinkContainer>
-                                <LinkContainer exact to="/calculator"><MenuItem eventKey={3.2}>Search Recipes</MenuItem></LinkContainer>
+                                <LinkContainer exact to="/advanced-search"><MenuItem eventKey={3.2}>Search Recipes</MenuItem></LinkContainer>
                                 <LinkContainer exact to="/about"><MenuItem eventKey={3.3}>View Favorites</MenuItem></LinkContainer>
                             </NavDropdown>
                             <NavDropdown eventKey={3} title="Tools" id="basic-nav-dropdown">
