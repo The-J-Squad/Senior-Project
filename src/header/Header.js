@@ -55,7 +55,7 @@ class Header extends React.Component {
                         </Navbar.Form>
                         <Nav pullRight>
                             <NavDropdown eventKey={4} title="Account" id="basic-nav-dropdown">
-                                <LinkContainer exact to="/topics"><MenuItem eventKey={4.1}>Edit Information</MenuItem></LinkContainer>
+                                <LinkContainer exact to="/account"><MenuItem eventKey={4.1}>Edit Information</MenuItem></LinkContainer>
                                 <LinkContainer exact to="/calculator"><MenuItem eventKey={4.2}>View Posted Recipes </MenuItem></LinkContainer>
                                 <MenuItem divider />
                                 <LinkContainer exact to="/logout"><MenuItem eventKey={4.4}>Log Out </MenuItem></LinkContainer>
