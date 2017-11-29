@@ -8,10 +8,7 @@ import {
 import {
     Row,
     Col,
-    Grid,
-    ButtonToolbar,
-    OverlayTrigger,
-    Button
+    Grid
 } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Header from '../../header/Header';
