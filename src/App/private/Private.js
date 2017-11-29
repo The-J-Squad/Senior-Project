@@ -91,6 +91,24 @@ class Private extends React.Component {
     </div>
   )
 
+  MyRecipes = () => (
+    <div>
+      <h2> My Recipes </h2>
+    </div>
+  )
+
+  Favorites = () => (
+    <div>
+      <h2> Favorite Recipes </h2>
+    </div>
+  )
+
+  SearchFilter = () => (
+    <div>
+      <h2> Search Recipes </h2>
+    </div>
+  )
+
   CalculatorPopover = (
     <Popover title="Popover right" id="id">
       <Calculator miniature={true} />
@@ -118,6 +136,9 @@ class Private extends React.Component {
               <Switch>
                 <Route path="/about" component={this.About} />
                 <Route path="/account" component={this.Account} />
+                <Route path="/username/recipes" component={this.MyRecipes} />
+                <Route path="/favorites" component={this.Favorites} />
+                <Route path="/recipes/search" component={this.SearchFilter} />
                 <Route path="/calculator" component={Calculator} />
                 <Route exact path="/recipes/search/:searchterms" component={RecipeSearch} />
                 <Route path="/create" component={RecipeCreator} />

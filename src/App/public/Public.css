@@ -6,9 +6,11 @@ h1 {
 p {
     color: rgb(73, 57, 47);
     font-family: Helvetica, sans-serif;
-    text-align: center;    
+    text-align: center;   
+    margin: 3%; 
 }
 
 .jumbotron {
-    background-color: rgb(238, 142, 68);
+    background-color: rgb(247, 163, 99);
+    margin: 2%;
 }
