@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  NavLink,
   Switch,
   Redirect
 } from 'react-router-dom'
@@ -25,6 +24,7 @@ import Home from './Home.js'
 import Recipe from '../../recipe/Recipe.js'
 import { GetAll } from '../../logic/RecipeService.js'
 import { IsLoggedIn } from '../../logic/AuthenticationService.js'
+import './Private.css';
 
 class Private extends React.Component {
   constructor(props) {
@@ -64,37 +64,30 @@ class Private extends React.Component {
     </ButtonToolbar>
   )
 
-  Topics = ({ match }) => (
+  Account = () => (
     <div>
-      <h2>Topics2</h2>
-      <ul>
-        <li>
-          <NavLink to={`${match.url}/rendering`}>
-            Rendering with React
-            </NavLink>
-        </li>
-        <li>
-          <NavLink to={`${match.url}/components`}>
-            Components
-            </NavLink>
-        </li>
-        <li>
-          <NavLink to={`${match.url}/props-v-state`}>
-            Props v. State
-            </NavLink>
-        </li>
-      </ul>
-
-      <Route path={`${match.url}/:topicId`} component={this.Topic} />
-      <Route exact path={match.url} render={() => (
-        <h3>Please select a topic.</h3>
-      )} />
-    </div>
-  )
-
-  Topic = ({ match }) => (
-    <div>
-      <h3>{match.params.topicId}</h3>
+      <h2>Edit Account Information</h2>
+      <form>
+        <div>
+          <label>
+            Username: 
+            <div>
+              (display username)
+            </div>
+          </label>
+        </div>
+        <div className="pad"></div>
+        <div>
+          <label>
+            Password:
+            <div>
+              <input type="text" placeholder="Password" />
+            </div>
+          </label>
+        </div>
+        <div className="pad"></div>
+          <button id="button2" type="button"> Submit </button>
+      </form>
     </div>
   )
 
@@ -124,7 +117,7 @@ class Private extends React.Component {
             <Col>
               <Switch>
                 <Route path="/about" component={this.About} />
-                <Route path="/topics" component={this.Topics} />
+                <Route path="/account" component={this.Account} />
                 <Route path="/calculator" component={Calculator} />
                 <Route exact path="/recipes/search/:searchterms" component={RecipeSearch} />
                 <Route path="/create" component={RecipeCreator} />
