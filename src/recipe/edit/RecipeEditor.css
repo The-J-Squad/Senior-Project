@@ -42,3 +42,44 @@
 .image-input-label:focus, .image-input-label:hover{
     background-color: red;
 }
+
+form{
+    padding: 4%;
+}
+
+.format{
+    font-size: medium;
+    /* margin: 1%; */
+}
+
+/* #image{
+    margin: 1%;
+} */
+
+#col{
+    columns: 2;
+}
+
+.pad{
+    padding: 2%;
+}
+
+.time{
+    width: 30%;
+}
+
+#servings{
+    width: 40%;
+}
+
+#name{
+    width: 200%;
+}
+
+#quantity{
+    width: 20%;
+}
+
+#button{
+    width: 30%
+}
