@@ -36,10 +36,9 @@ class Header extends React.Component {
                     <Navbar.Collapse>
                         <Nav>
                             <LinkContainer exact to="/home" ><NavItem eventKey={1}>Home</NavItem></LinkContainer>
-
                             <NavDropdown eventKey={3} title="Menu" id="basic-nav-dropdown">
                                 <LinkContainer exact to="/create"><MenuItem eventKey={3.1}>Add Recipe</MenuItem></LinkContainer>
-                                <LinkContainer exact to="/recipes/search"><MenuItem eventKey={3.2}>Search Recipes</MenuItem></LinkContainer>
+                                <LinkContainer exact to="/advanced-search"><MenuItem eventKey={3.2}>Search Recipes</MenuItem></LinkContainer>
                                 <LinkContainer exact to="/favorites"><MenuItem eventKey={3.3}>View Favorites</MenuItem></LinkContainer>
                             </NavDropdown>
                             <NavDropdown eventKey={3} title="Tools" id="basic-nav-dropdown">
