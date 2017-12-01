@@ -1,10 +1,10 @@
-import {Logout} from './AuthenticationService';
+import {Logout, GetAuthHeader} from './AuthenticationService';
 
 async function GetAll() {
     let response = await fetch('/api/recipes', {
         method: 'get',
         headers: {
-            'Authorization': localStorage.getItem("ReciprocityAuth")
+            'Authorization': GetAuthHeader()
         }
     });
 
@@ -19,7 +19,7 @@ async function Get(id) {
     let response = await fetch(`/api/recipes/${id}`, {
         method: 'get',
         headers: {
-            'Authorization': localStorage.getItem("ReciprocityAuth")
+            'Authorization': GetAuthHeader()
         }
     });
 
@@ -34,7 +34,7 @@ async function GetSpecificRecipes(searchterms){
 	let response = await fetch(`/api/recipes/search/${searchterms}`, {
 		method: 'get',
         headers: {
-            'Authorization': localStorage.getItem("ReciprocityAuth")
+            'Authorization': GetAuthHeader()
         }
 	});
 
@@ -51,7 +51,7 @@ async function Update(recipe) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("ReciprocityAuth")
+            'Authorization': GetAuthHeader()
         },
         body: JSON.stringify(recipe)
     });
@@ -69,7 +69,7 @@ async function Add(recipe) {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("ReciprocityAuth")
+            'Authorization': GetAuthHeader()
         },
         body: JSON.stringify(recipe)
     });
@@ -85,7 +85,7 @@ async function Delete(id) {
     let response = await fetch(`/api/recipes/${id}`, {
         method: 'delete',
         headers: {
-            'Authorization': localStorage.getItem("ReciprocityAuth")
+            'Authorization': GetAuthHeader()
         }
     });
 

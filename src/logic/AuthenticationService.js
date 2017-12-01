@@ -1,4 +1,5 @@
-var logoutAlert;
+var logoutAlert, jwt;
+var loggedIn = false;
 
 async function Login(username, password) {
     let response = undefined;
@@ -18,7 +19,13 @@ async function Login(username, password) {
     }
 
     if (response.status === 200) {
-        localStorage.setItem("ReciprocityAuth", "Bearer " + await response.json())
+        jwt = "Bearer " + await response.json();
+
+        if (window.localStorage) {
+            localStorage.setItem("ReciprocityAuth", jwt);
+        }
+
+        loggedIn = true;
         return true;
     }
     else {
@@ -48,26 +55,41 @@ async function SignUp(username, password) {
 }
 
 function Logout() {
-    localStorage.removeItem("ReciprocityAuth");
-    if(logoutAlert){
+    if (window.localStorage) {
+        localStorage.removeItem("ReciprocityAuth");
+    }
+
+    loggedIn = false;
+    if (logoutAlert) {
         logoutAlert();
     }
     return true;
 }
 
-function RegisterLogoutTrigger(alert){
+function RegisterLogoutTrigger(alert) {
     logoutAlert = alert;
 }
 
 function IsLoggedIn() {
-    let jwt = localStorage.getItem("ReciprocityAuth");
+    if (window.localStorage) {
+        jwt = GetAuthHeader();
+    }
+    if (jwt) {
+        loggedIn = true;
+    }
+    else {
+        loggedIn = false;
+    }
 
-    if(jwt){
-        return true;
-    }
-    else{
-        return false;
-    }
+    return loggedIn;
 }
 
-export { Login, Logout, IsLoggedIn, SignUp, RegisterLogoutTrigger };
+function GetAuthHeader() {
+    if (window.localStorage) {
+        jwt = localStorage.getItem("ReciprocityAuth");;
+    }
+
+    return jwt;
+}
+
+export { Login, Logout, IsLoggedIn, SignUp, RegisterLogoutTrigger, GetAuthHeader };
