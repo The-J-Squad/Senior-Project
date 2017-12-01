@@ -34,18 +34,22 @@ class Private extends React.Component {
       recipes: []
     }
 
-    if (!IsLoggedIn) {
+    if (!IsLoggedIn()) {
       this.props.logout();
     }
+    try {
+      GetAll().then((json) => {
+        let recipes = [];
+        json.forEach((recipe) => {
+          recipes.push(() => recipe);
+        });
 
-    GetAll().then((json) => {
-      let recipes = [];
-      json.forEach((recipe) => {
-        recipes.push(() => recipe);
-      });
-
-      this.setState({ recipes });
-    })
+        this.setState({ recipes });
+      })
+    }
+    catch (ex) {
+      console.log(ex);
+    }
   }
 
   About = () => (
@@ -71,7 +75,7 @@ class Private extends React.Component {
       <form>
         <div>
           <label>
-            Username: 
+            Username:
             <div>
               (display username)
             </div>
@@ -87,7 +91,7 @@ class Private extends React.Component {
           </label>
         </div>
         <div className="pad"></div>
-          <button id="button2" type="button"> Submit </button>
+        <button id="button2" type="button"> Submit </button>
       </form>
     </div>
   )
@@ -142,7 +146,7 @@ class Private extends React.Component {
                 <Route path="/recipes/search" component={this.SearchFilter} />
                 <Route path="/calculator" component={Calculator} />
                 <Route exact path="/recipes/search/:searchterms" component={RecipeSearch} />
-				<Route path="/advanced-search" component={RecipeAdvSearch} />
+                <Route path="/advanced-search" component={RecipeAdvSearch} />
                 <Route path="/create" component={RecipeCreator} />
                 <Route exact path="/recipes/:id" component={Recipe} />
                 <Route path="/recipes/:id/edit" component={RecipeEditor} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import Private from './private/Private';
 import Public from './public/Public';
-import { Login, Logout, IsLoggedIn } from '../logic/AuthenticationService.js'
+import { Login, Logout, IsLoggedIn, RegisterLogoutTrigger } from '../logic/AuthenticationService.js'
 import './App.css'
 
 class App extends React.Component {
@@ -10,12 +10,21 @@ class App extends React.Component {
     this.state = {
       loggedIn: IsLoggedIn()
     }
+
+    RegisterLogoutTrigger(this.logoutAlert.bind(this));
   }
 
   async login(username, password) {
     let isSuccess = await Login(username, password);
-    this.setState({ loggedIn: IsLoggedIn() });
+    if(isSuccess){
+      this.setState({ loggedIn: IsLoggedIn() });
+    }
+    
     return isSuccess;
+  }
+
+  logoutAlert() {
+    this.setState({ loggedIn: false });
   }
 
   logout() {
