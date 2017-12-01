@@ -37,7 +37,7 @@ class RecipeEditor extends React.Component {
         }
     }
     render() {
-        if (this.state.images && this.state.images.length === 0) {
+        if (!this.state.images || this.state.images.length === 0) {
             return <div> No image found </div>
         }
         else if (this.state.images.length === 1) {

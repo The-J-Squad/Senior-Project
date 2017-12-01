@@ -13,8 +13,13 @@ class Home extends React.Component {
     }
 
     async loadRecipes() {
-        this.recipes = await GetAll();
-        this.setState({ loading: false });
+        try {
+            this.recipes = await GetAll();
+            this.setState({ loading: false });
+        }
+        catch (ex) {
+            console.log(ex);
+        }
     }
 
     render() {

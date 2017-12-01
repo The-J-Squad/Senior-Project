@@ -1,21 +1,47 @@
+import {Logout} from './AuthenticationService';
+
 async function GetAll() {
     let response = await fetch('/api/recipes', {
-        method: 'get'
+        method: 'get',
+        headers: {
+            'Authorization': localStorage.getItem("ReciprocityAuth")
+        }
     });
+
+    if(response.status===401){
+        Logout();
+    }
+
     return await response.json();
 }
 
 async function Get(id) {
     let response = await fetch(`/api/recipes/${id}`, {
-        method: 'get'
+        method: 'get',
+        headers: {
+            'Authorization': localStorage.getItem("ReciprocityAuth")
+        }
     });
+
+    if(response.status===401){
+        Logout();
+    }
+
     return await response.json();
 }
 
 async function GetSpecificRecipes(searchterms){
 	let response = await fetch(`/api/recipes/search/${searchterms}`, {
-		method: 'get'
+		method: 'get',
+        headers: {
+            'Authorization': localStorage.getItem("ReciprocityAuth")
+        }
 	});
+
+    if(response.status===401){
+        Logout();
+    }
+
 	return await response.json();
 }
 
@@ -24,10 +50,15 @@ async function Update(recipe) {
         method: 'put',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("ReciprocityAuth")
         },
         body: JSON.stringify(recipe)
     });
+
+    if(response.status===401){
+        Logout();
+    }
 
     return await response.json();
 }
@@ -37,18 +68,31 @@ async function Add(recipe) {
         method: 'post',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("ReciprocityAuth")
         },
         body: JSON.stringify(recipe)
     });
+
+    if(response.status===401){
+        Logout();
+    }
 
     return await response.json();
 }
 
 async function Delete(id) {
     let response = await fetch(`/api/recipes/${id}`, {
-        method: 'delete'
+        method: 'delete',
+        headers: {
+            'Authorization': localStorage.getItem("ReciprocityAuth")
+        }
     });
+
+    if(response.status===401){
+        Logout();
+    }
+
     return await response.json();
 }
 

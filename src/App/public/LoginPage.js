@@ -1,46 +1,47 @@
 import React from 'react';
-import {
-    Jumbotron,
-    Button,
-    Grid,
-    Row,
-    Col
-} from 'react-bootstrap'
-import ImageMapper from 'react-image-mapper';
-import Center from 'react-center';
-import loginImage from '../../images/login_buttons.jpg';
-
-var MAP = {
-    name: "signIn-Up",
-    areas: [
-        { shape: "rect", coords: [75, 99, 181, 150], href: "/login" },    //Sign In
-        { shape: "rect", coords: [71, 229, 191, 276], href: "/SignUp" },   //Sign Up
-    ]
-};
+import PropTypes from 'prop-types';
 
 class LoginPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: '',
+            error: ''
+        }
+    }
+
+    onSubmit(e){
+        this.props.onSubmit(this.state.username, this.state.password).then(error =>{
+            this.setState({ error });
+        });
+        
+        e.preventDefault();
+    }
+
     render() {
         return (
-            <Grid>
-                <Row>
-                    <Col>
-                        <Jumbotron>
-                            <h1>Reciprocity</h1>
-                            <p>Where sharing recipes is simple.</p>
-                            <p><Button bsStyle="success" href="/about">Learn more</Button></p>
-                        </Jumbotron>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <Center>
-                            <ImageMapper src={loginImage} map={MAP}/>
-                        </Center>
-                    </Col>
-                </Row>
-            </Grid>
+            <form onSubmit={this.onSubmit.bind(this)}>
+                <label>
+                    Username:
+                    <div>
+                        <input type="text" value={this.state.username} onChange={(event) => this.setState({ username: event.target.value })} placeholder="Username" required/>
+                    </div>
+                </label>
+                <label>
+                    Password:
+                    <div>
+                        <input type="password" value={this.state.password} onChange={(event) => this.setState({ password: event.target.value })} placeholder="Password" required/>
+                    </div>
+                </label>
+                <div className="errorMessage">{this.state.error}</div>
+                <button type="submit"> Submit </button>
+            </form>
         );
     }
 }
 
+LoginPage.propTypes = {
+    onSubmit: PropTypes.func
+};
 export default LoginPage;

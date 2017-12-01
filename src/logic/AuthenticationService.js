@@ -1,27 +1,73 @@
-var loggedIn = false;
+var logoutAlert;
 
 async function Login(username, password) {
-    let response = await fetch(`/api/authenticate`, {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-    });
-    console.log("If a real response appears the backend is ready for authentication", response);
-    //return await response.json();
-    loggedIn = true;
-    return true;
+    let response = undefined;
+    try {
+        response = await fetch(`/api/authenticate`, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+    }
+    catch (ex) {
+        console.log(ex);
+        return false;
+    }
+
+    if (response.status === 200) {
+        localStorage.setItem("ReciprocityAuth", "Bearer " + await response.json())
+        return true;
+    }
+    else {
+        return false
+    }
+}
+
+async function SignUp(username, password) {
+    let response = undefined;
+    try {
+        response = await fetch(`/api/signup`, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+    }
+    catch (ex) {
+        console.log(ex);
+        return false;
+    }
+
+    console.log(response);
+    return response.status === 200 && await response.json();
 }
 
 function Logout() {
-    loggedIn = false;
+    localStorage.removeItem("ReciprocityAuth");
+    if(logoutAlert){
+        logoutAlert();
+    }
     return true;
 }
 
-function IsLoggedIn() {
-    return loggedIn;
+function RegisterLogoutTrigger(alert){
+    logoutAlert = alert;
 }
 
-export { Login, Logout, IsLoggedIn };
+function IsLoggedIn() {
+    let jwt = localStorage.getItem("ReciprocityAuth");
+
+    if(jwt){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+export { Login, Logout, IsLoggedIn, SignUp, RegisterLogoutTrigger };

@@ -14,3 +14,7 @@ p {
     background-color: rgb(247, 163, 99);
     margin: 2%;
 }
+
+.errorMessage{
+    color: red;
+}
